@@ -14,52 +14,51 @@ def generate_launch_description():
         'rover_lidar.rviz'
     )
 
+    bridge_config = os.path.join(
+        pkg_share,
+        'config',
+        'r1_rover_bridge.yaml'
+    )
+
     bridge = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
-        arguments=[
-            '/scan@sensor_msgs/msg/LaserScan@gz.msgs.LaserScan',
-            '/world/urjc_trains_world/model/rover_lidar_r1_0/link/base_link/sensor/navsat_sensor/navsat@sensor_msgs/msg/NavSatFix@gz.msgs.NavSat'
-        ],
-        remappings=[
-            ('/world/urjc_trains_world/model/rover_lidar_r1_0/link/base_link/sensor/navsat_sensor/navsat','/gps')
-        ],
+        parameters=[{'config_file': bridge_config}],
         output='screen'
     )
 
-    lidar_tf = Node(
+    base_to_lidar =Node(
         package='tf2_ros',
         executable='static_transform_publisher',
-        arguments=[
-            '0', '0', '0.13',
-            '0', '0', '0',
-            'base_link',
-            'rover_lidar_r1_0/lidar_link/gpu_lidar'
-        ],
+        arguments=['0.13','0','0.13','0','0','0','base_link','rover_lidar_r1_0/lidar_link/gpu_lidar'],
         output='screen'
     )
 
-    map_to_odom = Node(
+    base_to_lfwheel = Node(
         package='tf2_ros',
         executable='static_transform_publisher',
-        arguments=[
-            '0', '0', '0',
-            '0', '0', '0',
-            'map',
-            'odom'
-        ],
+        arguments=['0.15','0.16317','0.0215','0','0','0','base_link','lf_wheel_link'],
         output='screen'
     )
 
-    odom_to_base = Node(
+    base_to_lbwheel = Node(
         package='tf2_ros',
         executable='static_transform_publisher',
-        arguments=[
-            '0', '0', '0',
-            '0', '0', '0',
-            'odom',
-            'base_link'
-        ],
+        arguments=['-0.15','0.16317','0.0215','0','0','0','base_link','lb_wheel_link'],
+        output='screen'
+    )
+
+    base_to_rfwheel = Node(
+        package='tf2_ros',
+        executable='static_transform_publisher',
+        arguments=['0.15','-0.16317','0.0215','0','0','0','base_link','rf_wheel_link'],
+        output='screen'
+    )
+
+    base_to_rbwheel = Node(
+        package='tf2_ros',
+        executable='static_transform_publisher',
+        arguments=['-0.15','-0.16317','0.0215','0','0','0','base_link','rb_wheel_link'],
         output='screen'
     )
 
@@ -72,9 +71,10 @@ def generate_launch_description():
 
     return LaunchDescription([
         bridge,
-        lidar_tf,
-        map_to_odom,
-        odom_to_base,
+        base_to_lidar,
+        base_to_lfwheel,
+        base_to_lbwheel,
+        base_to_rfwheel,
+        base_to_rbwheel,
         rviz
     ])
-
