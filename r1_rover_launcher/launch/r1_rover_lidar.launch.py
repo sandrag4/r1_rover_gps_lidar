@@ -62,6 +62,13 @@ def generate_launch_description():
         output='screen'
     )
 
+    odom_to_tf_cmd = Node(
+        package='odom_to_tf',
+        executable='odom_to_tf_main',
+        name='odom_to_tf',
+        output='screen'
+    )
+    
     rviz = Node(
         package='rviz2',
         executable='rviz2',
@@ -76,5 +83,8 @@ def generate_launch_description():
         base_to_lbwheel,
         base_to_rfwheel,
         base_to_rbwheel,
+        odom_to_tf_cmd,
         rviz
     ])
+
+
