@@ -5,13 +5,11 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /Global Options1
-        - /LaserScan1
         - /NavMapDisplay1/Topic1
-        - /TF1
         - /TF1/Frames1
-        - /TF1/Tree1
         - /PointCloud21/Topic1
-      Splitter Ratio: 0.4794117510318756
+        - /RobotModel1/Description Topic1
+      Splitter Ratio: 0.7147058844566345
     Tree Height: 445
   - Class: rviz_common/Selection
     Name: Selection
@@ -136,14 +134,22 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: false
+        base_cover_link:
+          Value: false
+        base_footprint:
+          Value: false
         base_link:
           Value: true
+        base_link2:
+          Value: false
         base_link_frd:
           Value: false
-        lb_wheel_link:
-          Value: true
-        lf_wheel_link:
-          Value: true
+        batery_link:
+          Value: false
+        gps_link:
+          Value: false
+        lidar_link:
+          Value: false
         map:
           Value: true
         map_ned:
@@ -152,12 +158,16 @@ Visualization Manager:
           Value: true
         odom_ned:
           Value: false
-        rb_wheel_link:
-          Value: true
-        rf_wheel_link:
-          Value: true
         rover_lidar_r1_0/lidar_link/gpu_lidar:
           Value: false
+        wheel_back_left_link:
+          Value: true
+        wheel_back_right_link:
+          Value: true
+        wheel_front_left_link:
+          Value: true
+        wheel_front_right_link:
+          Value: true
       Marker Scale: 1
       Name: TF
       Show Arrows: false
@@ -169,15 +179,25 @@ Visualization Manager:
             {}
           odom:
             base_link:
+              base_footprint:
+                base_link2:
+                  base_cover_link:
+                    {}
+                  batery_link:
+                    {}
+                  gps_link:
+                    {}
+                  lidar_link:
+                    {}
+                  wheel_back_left_link:
+                    {}
+                  wheel_back_right_link:
+                    {}
+                  wheel_front_left_link:
+                    {}
+                  wheel_front_right_link:
+                    {}
               base_link_frd:
-                {}
-              lb_wheel_link:
-                {}
-              lf_wheel_link:
-                {}
-              rb_wheel_link:
-                {}
-              rf_wheel_link:
                 {}
               rover_lidar_r1_0/lidar_link/gpu_lidar:
                 {}
@@ -278,6 +298,81 @@ Visualization Manager:
         Reliability Policy: Reliable
         Value: /planner_node/astar/path
       Value: true
+    - Alpha: 1
+      Class: rviz_default_plugins/RobotModel
+      Collision Enabled: false
+      Description File: ""
+      Description Source: Topic
+      Description Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /robot_description
+      Enabled: true
+      Links:
+        All Links Enabled: true
+        Expand Joint Details: false
+        Expand Link Details: false
+        Expand Tree: false
+        Link Tree Style: Links in Alphabetic Order
+        base_cover_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        base_footprint:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        base_link2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        batery_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gps_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        lidar_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wheel_back_left_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wheel_back_right_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wheel_front_left_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wheel_front_right_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+      Mass Properties:
+        Inertia: false
+        Mass: false
+      Name: RobotModel
+      TF Prefix: ""
+      Update Interval: 0
+      Value: true
+      Visual Enabled: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -324,7 +419,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/XYOrbit
-      Distance: 9.865392684936523
+      Distance: 6.722988605499268
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -360,5 +455,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1378
-  X: 600
+  X: 542
   Y: 294
