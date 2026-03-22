@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+
+<robot name="aion_r1" xmlns:xacro="http://wiki.ros.org/xacro">
+
+  <!--  includes  -->
+  <xacro:include filename="$(find r1_description)/urdf/utils/utils.urdf.xacro"/>
+  <xacro:include filename="$(find r1_description)/urdf/base/robot_base.urdf.xacro"/>
+  <xacro:include filename="$(find r1_description)/urdf/wheels/rover_wheel.urdf.xacro"/>
+  
+  <!--  argumentos  -->
+  <xacro:arg name="robot_ns" default=""/>
+  <xacro:arg name="prefix" default=""/>
+
+  <!--  Robot Parts  -->
+
+  <!--  Utils  -->
+  <xacro:utils/>
+
+  <!--  Base  -->
+  <xacro:robot_base/>
+
+  <!--  Wheels  -->
+  <xacro:rover_wheel parent="base_link2">
+  </xacro:rover_wheel>
+
+
+</robot>

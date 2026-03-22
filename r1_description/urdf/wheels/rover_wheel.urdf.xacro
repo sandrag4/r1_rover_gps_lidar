@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+
+<robot name="aion_r1" xmlns:xacro="http://wiki.ros.org/xacro">
+  <xacro:macro name="rover_wheel" params="parent">
+
+    <!--  wheel joint  -->
+    <joint name="wheel_back_left_link_joint" type="fixed">
+      <origin rpy="1.57080 0.00000 0.00000" xyz="-0.15000 0.16500 -0.04250"/>
+      <parent link="base_link2"/>
+      <child link="wheel_back_left_link"/>
+    </joint>
+    <joint name="wheel_back_right_link_joint" type="fixed">
+      <origin rpy="1.57080 0.00000 0.00000" xyz="-0.15000 -0.16500 -0.04250"/>
+      <parent link="base_link2"/>
+      <child link="wheel_back_right_link"/>
+    </joint>
+    <joint name="wheel_front_left_link_joint" type="fixed">
+      <origin rpy="1.57080 0.00000 0.00000" xyz="0.15000 0.16500 -0.04250"/>
+      <parent link="base_link2"/>
+      <child link="wheel_front_left_link"/>
+    </joint>
+    <joint name="wheel_front_right_link_joint" type="fixed">
+      <origin rpy="1.57080 0.00000 0.00000" xyz="0.15000 -0.16500 -0.04250"/>
+      <parent link="base_link2"/>
+      <child link="wheel_front_right_link"/>
+    </joint>
+
+
+    <!--  wheel link  -->
+    <link name="wheel_back_left_link">
+      <collision name="wheel_back_left_collision">
+        <origin rpy="0.00000 0.00000 0.00000" xyz="-0.00000 0.00000 0.00000"/>
+        <geometry>
+          <mesh filename="file://$(find r1_description)/meshes/dae/Torus.005.dae" scale="0.06000 0.06000 0.18000"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <inertia ixx="0.00172" ixy="0.00000" ixz="0.00000" iyy="0.00264" iyz="0.00000" izz="0.00172"/>
+        <origin rpy="0.00000 0.00000 0.00000" xyz="-0.00000 0.00000 0.00000"/>
+        <mass value="1.00000"/>
+      </inertial>
+      <visual name="wheel_back_left">
+        <origin rpy="0.00000 0.00000 0.00000" xyz="-0.00000 0.00000 0.00000"/>
+        <material name="Material_black"/>
+        <geometry>
+          <mesh filename="file://$(find r1_description)/meshes/dae/Torus.005.dae" scale="0.06000 0.06000 0.18000"/>
+        </geometry>
+      </visual>
+    </link>
+
+    <link name="wheel_back_right_link">
+      <collision name="wheel_back_right_collision">
+        <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 -0.00000"/>
+        <geometry>
+          <mesh filename="file://$(find r1_description)/meshes/dae/Torus.006.dae" scale="0.06000 0.06000 0.18000"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <inertia ixx="0.00172" ixy="0.00000" ixz="0.00000" iyy="0.00264" iyz="0.00000" izz="0.00172"/>
+        <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+        <mass value="1.00000"/>
+      </inertial>
+      <visual name="wheel_back_right">
+        <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 -0.00000"/>
+        <material name="Material_black"/>
+        <geometry>
+          <mesh filename="file://$(find r1_description)/meshes/dae/Torus.006.dae" scale="0.06000 0.06000 0.18000"/>
+        </geometry>
+      </visual>
+    </link>
+
+    <link name="wheel_front_left_link">
+      <collision name="wheel_front_left_collision">
+        <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 -0.00000 -0.00000"/>
+        <geometry>
+          <mesh filename="file://$(find r1_description)/meshes/dae/Torus.004.dae" scale="0.06000 0.06000 0.18000"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <inertia ixx="0.00172" ixy="0.00000" ixz="0.00000" iyy="0.00264" iyz="0.00000" izz="0.00172"/>
+        <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 -0.00000"/>
+        <mass value="1.00000"/>
+      </inertial>
+      <visual name="wheel_front_left">
+        <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 -0.00000 -0.00000"/>
+        <material name="Material_black"/>
+        <geometry>
+          <mesh filename="file://$(find r1_description)/meshes/dae/Torus.004.dae" scale="0.06000 0.06000 0.18000"/>
+        </geometry>
+      </visual>
+    </link>
+
+    <link name="wheel_front_right_link">
+      <collision name="wheel_front_right_collision">
+        <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 -0.00000"/>
+        <geometry>
+          <mesh filename="file://$(find r1_description)/meshes/dae/Torus.007.dae" scale="0.06000 0.06000 0.18000"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <inertia ixx="0.00172" ixy="0.00000" ixz="0.00000" iyy="0.00264" iyz="0.00000" izz="0.00172"/>
+        <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 -0.00000"/>
+        <mass value="1.00000"/>
+      </inertial>
+      <visual name="wheel_front_right">
+        <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 -0.00000"/>
+        <material name="Material_black"/>
+        <geometry>
+          <mesh filename="file://$(find r1_description)/meshes/dae/Torus.007.dae" scale="0.06000 0.06000 0.18000"/>
+        </geometry>
+      </visual>
+    </link>
+
+
+  </xacro:macro>
+</robot>
