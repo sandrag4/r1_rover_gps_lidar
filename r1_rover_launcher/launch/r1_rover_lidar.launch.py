@@ -13,7 +13,7 @@ def generate_launch_description():
 
     pkg_share = get_package_share_directory('r1_rover_launcher')
 
-    rviz_config = os.path.join(
+    rover_rviz_config = os.path.join(
         pkg_share,
         'rviz',
         'rover_lidar.rviz'
@@ -36,7 +36,6 @@ def generate_launch_description():
         value_type=str
     )
 
-
     bridge = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
@@ -48,6 +47,14 @@ def generate_launch_description():
         package='tf2_ros',
         executable='static_transform_publisher',
         arguments=['0.13','0','0.13','0','0','0','base_link','rover_lidar_r1_0/lidar_link/gpu_lidar'],
+        parameters=[{'use_sim_time': use_sim_time}],
+        output='screen'
+    )
+
+    base_to_gps =Node(
+        package='tf2_ros',
+        executable='static_transform_publisher',
+        arguments=['0.0','0','0.12','0','0','0','base_link','rover_lidar_r1_0/base_link/navsat_sensor'],
         parameters=[{'use_sim_time': use_sim_time}],
         output='screen'
     )
@@ -95,7 +102,7 @@ def generate_launch_description():
     rover_description = Node(
         package='tf2_ros',
         executable='static_transform_publisher',
-        arguments=['0.0','0.0','0.0','0','0','0','base_link','base_footprint'],
+        arguments=['0.0','0.0','0.0','0','0','0','base_link','robot_meshes'],
         parameters=[{'use_sim_time': use_sim_time}],
         output='screen'
     )
@@ -111,10 +118,18 @@ def generate_launch_description():
         }]
     )
     
-    rviz = Node(
+    rover_rviz = Node(
         package='rviz2',
         executable='rviz2',
-        arguments=['-d', rviz_config],
+        arguments=['-d', rover_rviz_config],
+        parameters=[{'use_sim_time': use_sim_time}],
+        output='screen'
+    )
+
+    rover_vel_cmd = Node(
+        package='r1_rover_vel',
+        executable='r1_rover_vel_main',
+        name='r1_rover_vel',
         parameters=[{'use_sim_time': use_sim_time}],
         output='screen'
     )
@@ -123,12 +138,14 @@ def generate_launch_description():
     return LaunchDescription([
         bridge,
         base_to_lidar,
-        #base_to_lfwheel,
-        #base_to_lbwheel,
-        #base_to_rfwheel,
-        #base_to_rbwheel,
+        base_to_gps,
+        base_to_lfwheel,
+        base_to_lbwheel,
+        base_to_rfwheel,
+        base_to_rbwheel,
         odom_to_tf_cmd,
         robot_state_publisher_node,
         rover_description,
-        rviz
+        rover_rviz,
+        rover_vel_cmd
     ])
