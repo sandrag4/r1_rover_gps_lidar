@@ -189,10 +189,6 @@
         <always_on>1</always_on>
         <update_rate>100</update_rate>
         <magnetometer>
-          <!-- TODO: update to fix units and coordinate system when we move past Harmonic -->
-          <!-- See https://github.com/gazebosim/gz-sim/pull/2460 -->
-          <!-- 3mgauss RMS: NOTE: noise is in tesla but sensor reports data in gauss -->
-          <!-- Noise modeled after IIS2MDC -->
           <x>
             <noise type="gaussian">
               <stddev>0.0001</stddev>
@@ -213,8 +209,8 @@
       <sensor name="navsat_sensor" type="navsat">
         <always_on>1</always_on>
         <update_rate>30</update_rate>
-
       </sensor>
+
     </link>
     <link name='lf_wheel_link'>
       <pose>0.15 0.16317 0.0215 0 -0 0</pose>
@@ -625,10 +621,9 @@
       <sensor name="gpu_lidar" type="gpu_lidar">
         <pose>0 0 0 0 0 0</pose>
         <always_on>true</always_on>
-        <update_rate>15</update_rate>
+        <update_rate>10</update_rate>
         <topic>/scan</topic>
         <visualize>true</visualize>
-
         <ray>
           <scan>
             <horizontal>
@@ -645,19 +640,14 @@
           </range>
         </ray>
       </sensor>
-      
     </link>
-
     <joint name="lidar_joint" type="fixed">
       <parent>base_link</parent>
       <child>lidar_link</child>
     </joint>
 
-
     <plugin filename="gz-sim-air-pressure-system" name="gz::sim::systems::AirPressure"/>
-
     <plugin filename="gz-sim-magnetometer-system" name="gz::sim::systems::Magnetometer"/>
-
     <plugin filename="gz-sim-navsat-system" name="gz::sim::systems::NavSat"/>
 
   </model>
