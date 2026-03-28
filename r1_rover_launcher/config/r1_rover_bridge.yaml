@@ -6,7 +6,6 @@
   direction: GZ_TO_ROS
   lazy: false
 
-
   # LIDAR
 - ros_topic_name: "/scan"
   gz_topic_name: "/scan"
@@ -14,7 +13,6 @@
   gz_type_name: "gz.msgs.LaserScan"
   direction: GZ_TO_ROS
   lazy: true
-
 
 # IMU
 - ros_topic_name: "/imu/data"
@@ -24,9 +22,8 @@
   direction: GZ_TO_ROS
   lazy: true
 
-
 # GPS
-- ros_topic_name: "/gps/fix"
+- ros_topic_name: "/robot/gps/fix"
   gz_topic_name: "/world/urjc_trains_world/model/rover_lidar_r1_0/link/base_link/sensor/navsat_sensor/navsat"
   ros_type_name: "sensor_msgs/msg/NavSatFix"
   gz_type_name: "gz.msgs.NavSat"
