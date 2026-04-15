@@ -1,0 +1,86 @@
+controller_node:
+  ros__parameters:
+    use_sim_time: true
+    colision_checker.active: true
+    colision_checker.debug_markers: true
+    colision_checker.robot_radius: 0.5
+    colision_checker.robot_height: 1.0
+    colision_checker.brake_acc: 1.0
+    colision_checker.safety_margin: 0.6
+    colision_checker.z_min_filter: 0.0
+    colision_checker.downsample_leaf_size: 0.05
+    controller_types: [mppi]
+    mppi:
+      plugin: easynav_mppi_controller/MPPIController
+      num_samples: 100
+      horizon_steps: 10	
+      dt:	0.1	
+      lambda:	0.1	
+      max_linear_velocity:	1.0	
+      max_angular_velocity:	2.0	
+      max_linear_acceleration:	0.4	
+      max_angular_acceleration:	1.5	
+      fov:	1.57	
+      safety_radius:	0.6	
+
+localizer_node:
+  ros__parameters:
+    use_sim_time: true
+    localizer_types: [gps_localizer]
+    gps_localizer:
+      rt_freq: 10.0
+      plugin: easynav_gps_localizer/GpsLocalizer
+      gps_topic: /robot/gps/fix
+      imu_topic: /imu/data
+      base_frame: base_link
+      world_frame: map
+
+maps_manager_node:
+  ros__parameters:
+    use_sim_time: true
+    transform_tolerance: 0.5
+    map_types: [bonxai, navmap]
+    bonxai:
+      freq: 10.0 
+      plugin: easynav_bonxai_maps_manager/BonxaiMapsManager
+      package: urjc_trains_world
+      bonxai_path_file: maps/map.pcd
+    navmap:
+      freq: 10.0 
+      plugin: easynav_navmap_maps_manager/NavMapMapsManager
+      package: urjc_trains_world
+      navmap_path_file: maps/map.navmap
+
+planner_node:
+  ros__parameters:
+    use_sim_time: true
+    planner_types: [astar]
+    astar:
+      plugin: easynav_navmap_planner/AStarPlanner
+      max_allowed_slope_deg: 20.0
+
+sensors_node:
+  ros__parameters:
+    transform_timeout: 0.5
+    use_sim_time: true
+    forget_time: 0.5
+    transform_tolerance: 0.5
+    sensors: [laser, imu, gps]
+    perception_default_frame: odom
+    laser:
+      topic: /scan
+      type: sensor_msgs/msg/LaserScan
+    imu:
+      topic: /imu/data
+      type: sensor_msgs/msg/Imu
+    gps:
+      topic: /robot/gps/fix
+      type: sensor_msgs/msg/NavSatFix
+
+system_node:
+  ros__parameters:
+    use_sim_time: true
+    tf_buffer_duration: 20.0
+    use_real_time: false
+    position_tolerance: 1.0
+    angle_tolerance: 0.25

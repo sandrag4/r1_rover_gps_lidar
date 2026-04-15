@@ -16,7 +16,7 @@ def generate_launch_description():
     easynav_config = os.path.join(
         get_package_share_directory('r1_rover_launcher'),
         'config',
-        'r1_rover_gps_navmap.params.yaml'
+        'r1_rover_gps_lidar_navmap.params.yaml'
     )
 
     gps_rviz_config = os.path.join(
@@ -54,8 +54,30 @@ def generate_launch_description():
         output='screen'
     )
 
+    offboard_cmd = ExecuteProcess(
+        cmd=[
+            'ros2', 'service', 'call',
+            '/mavros/set_mode',
+            'mavros_msgs/srv/SetMode',
+            '{base_mode: 0, custom_mode: OFFBOARD}'
+        ],
+        output='screen'
+    )
+
+    arm_cmd = ExecuteProcess(
+        cmd=[
+            'ros2', 'service', 'call',
+            '/mavros/cmd/arming',
+            'mavros_msgs/srv/CommandBool',
+            '{value: true}'
+        ],
+        output='screen'
+    )
+
     return LaunchDescription([
         easynav_cmd,
         gps_rviz,
-        easynav_rviz
+        easynav_rviz,
+        offboard_cmd,
+        arm_cmd
     ])
