@@ -23,7 +23,7 @@ ros2 launch mavros px4.launch fcu_url:=udp://:14540@14557
 
 4. Launchers:
 ```sh
-ros2 launch r1_rover_launcher r1_rover_lidar.launch.py
+ros2 launch r1_rover_launcher r1_sim_rover.launch.py
 ```
 ```sh
 ros2 launch r1_rover_launcher r1_rover_easynav.launch.py
